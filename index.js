@@ -52,4 +52,4 @@ Engine.prototype.render = function(templateName) {
   return this.readTemplate(templateName);
 };
 
-module.exports = engine;
+module.exports = Engine;
