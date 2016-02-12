@@ -6,7 +6,7 @@ function Engine(path) {
 }
 
 Engine.prototype.getTemplatePath = function (templateName) {
-  this.path + "/" +  templateName.replace(/\./g, '/') + '.html';
+  return this.path + "/" +  templateName.replace(/\./g, '/') + '.html';
 };
 
 //TODO: Promisify this
