@@ -1,8 +1,9 @@
 var fs = require('fs'),
     matchers = require('./matchers');
 
-function Engine(path) {
+function Engine(path, verbose) {
   this.path = path || 'templates';
+  this.verbose = verbose || false;
 }
 
 Engine.prototype.getTemplatePath = function (templateName) {
@@ -20,11 +21,33 @@ Engine.prototype.replaceTemplate = function (html) {
     
     data = self.replaceTemplate(data);
     
+    if (self.verbose) {
+      data = '<!-- BEGIN ' + group + '.html -->' + data + '<!-- END ' + group +  '.html -->';
+    }
+
     return data;
     
   });
+    
+};
+
+Engine.prototype.replaceContainer = function (html) {
   
-  //TODO: Implement layouts
+  var self = this;
+  
+  var match = html.match(matchers.container);
+  
+  var containerSrc = match[1];
+  
+  var content = match[2];
+  
+  var container = fs.readFileSync(self.getTemplatePath(containerSrc), 'utf8');
+  
+  if (self.verbose) {
+    content = '<!-- BEGIN content -->' + content + '<!-- END content -->';
+  }
+  
+  return container.replace(matchers.content, content);
   
 };
 
@@ -63,7 +86,7 @@ Engine.prototype.readTemplate = function (templateName, data) {
         return reject(err);
       }
       
-      return resolve(self.replaceData(self.replaceTemplate(html), data));
+      return resolve(self.replaceData(self.replaceTemplate(self.replaceContainer(html)), data));
       
     });
     
