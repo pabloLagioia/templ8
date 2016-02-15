@@ -1,5 +1,12 @@
 #Templ8
-This is a simple templating library
+This is a simple templating library for NodeJS
+It's made of the following items:
+
+* Templates
+* Containers/Content
+* Data
+
+This library will basically replace template nodes by the specified source and will insert content into containers in the same way
 
 ##Example
 
@@ -8,11 +15,11 @@ This is a simple templating library
 <html>
   <template src="head"/>
   <body>
+    <h1>Templ8</h1>
+    <p>A pretty simple templating engine</p>
     <template src="navigation"/>
-    <h1>Hello! This is test</h1>
-    <p>Hi, this is me testing my new templating engine</p>
-    <p>It's just serves static HTML in a simple way</p>
-    <template src="example"/>
+    <p>This is a container called index</p>
+    <content>
     <template src="footer"/>
   </body>
 </html>
@@ -35,15 +42,23 @@ This is a simple templating library
 
 ###templates/example.html
 ```
-<pre>
-  Here's an example code
+<div>
+  Here's an example on how to pass data
   <template src="someOtherCode"/>
-</pre>
+  <p>See it in action:</p>
+  <p>Hello! my name is {{user.name}}!</p>
+</div>
 ```
 
 ###templates/someOtherCode.html
 ```
-var a = 100;
+<pre>
+  engine.render('index', {
+    "user": {
+      "name": "Sean"
+    }
+  });
+</pre>
 ```
 
 ###templates/footer.html
@@ -57,13 +72,22 @@ var a = 100;
 ```
 var express = require("express"),
     app = express(),
-    templ8 = require("templ8");
+    engine = require("templ8");
 
-var engine = new templ8("templates");
+const PORT = 4000;
+
+engine = new engine();
+
+//Add HTML comments to show where templates begin and end
+engine.verbose = true;
 
 app.get("/", function (req, res) {
   
-  engine.render('index').then(function (html) {
+   engine.render('body', {
+    "user": {
+      "name": "Sean"
+    }
+  }).then(function (html) {
     res.setHeader('content-type', 'text/html');
     res.status(200).end(html);
   }).catch(function (err) {
@@ -72,12 +96,11 @@ app.get("/", function (req, res) {
   
 });
 
-app.listen(4000, function () {
-  console.log("App running");
+app.listen(PORT, function () {
+  console.log('Example listening at', PORT);
 });
 ```
 
 ##Todos
 * Use promises in file reading operations
-* Implement layouts
 * Implement as an Express rendering engine
