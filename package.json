@@ -1,8 +1,12 @@
 {
   "name": "templ8",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "Just a simple templating engine",
   "main": "index.js",
   "author": "pablolagioia",
-  "license": "MIT"
+  "license": "MIT",
+  "repository" :{
+    "type" : "git",
+    "url" : "https://github.com/pabloLagioia/templ8"
+  }
 }

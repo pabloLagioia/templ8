@@ -37,6 +37,10 @@ Engine.prototype.replaceContainer = function (html) {
   
   var match = html.match(matchers.container);
   
+  if (!match) {
+    return html;
+  }
+  
   var containerSrc = match[1];
   
   var content = match[2];
