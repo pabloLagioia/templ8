@@ -1,6 +1,6 @@
 {
   "name": "templ8",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "description": "Just a simple templating engine",
   "main": "index.js",
   "author": "pablolagioia",

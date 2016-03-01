@@ -102,4 +102,25 @@ Engine.prototype.render = function(templateName, data) {
   return this.readTemplate(templateName, data);
 };
 
+Engine.prototype.respondWithTemplate = function(templateName) {
+
+  var self = this;
+
+  return function(req, res, next) {
+
+    self.render(templateName).then(function(html) {
+
+      res.header('content-type', 'text/html').status(200).end(html);
+
+    }).catch(function(err) {
+
+      console.error(err);
+      next(err);
+
+    });
+
+  }
+
+};
+
 module.exports = Engine;
