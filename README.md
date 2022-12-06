@@ -1,4 +1,4 @@
-#Templ8
+# Templ8
 This is a simple templating library for NodeJS
 It's made of the following items:
 
@@ -8,9 +8,9 @@ It's made of the following items:
 
 This library will basically replace template nodes by the specified source and will insert content into containers in the same way
 
-##Example
+## Example
 
-###templates/index.html
+### templates/index.html
 ```
 <html>
   <template src="head"/>
@@ -25,13 +25,13 @@ This library will basically replace template nodes by the specified source and w
 </html>
 ```
 
-###templates/head.html
+### templates/head.html
 ```
 <meta charset="utf8">
 <title>Templating engine test</title>
 ```
 
-###templates/navigation.html
+### templates/navigation.html
 ```
 <nav>
   <a href="">Home</a>
@@ -40,7 +40,7 @@ This library will basically replace template nodes by the specified source and w
 </nav>
 ```
 
-###templates/example.html
+### templates/example.html
 ```
 <div>
   Here's an example on how to pass data
@@ -50,7 +50,7 @@ This library will basically replace template nodes by the specified source and w
 </div>
 ```
 
-###templates/someOtherCode.html
+### templates/someOtherCode.html
 ```
 <pre>
   engine.render('index', {
@@ -61,14 +61,14 @@ This library will basically replace template nodes by the specified source and w
 </pre>
 ```
 
-###templates/footer.html
+### templates/footer.html
 ```
 <div>
   This is the footer
 </div>
 ```
 
-###Using express
+### Using express
 ```
 var express = require("express"),
     app = express(),
@@ -101,6 +101,6 @@ app.listen(PORT, function () {
 });
 ```
 
-##Todos
+## Todos
 * Use promises in file reading operations
 * Implement as an Express rendering engine
